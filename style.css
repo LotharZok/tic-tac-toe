@@ -1,0 +1,47 @@
+* {
+    transition: all 0.25s ease-in-out;
+}
+
+/* Setzen Sie die Hintergrundfarbe für die gesamte Seite */
+body {
+    background-color: #323232;
+    font-family: "Open Sans", sans-serif;
+    margin: 0;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+}
+
+#content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+    margin-top: 200px;
+}
+
+/* Legen Sie die Farbe und Dicke der Tabelle fest */
+table {
+    /* border: 5px solid white; */
+    border-collapse: collapse;
+    border-style: hidden;
+}
+
+/* Legen Sie die Farbe und Dicke der inneren Trennlinien der Tabelle fest */
+table td {
+    border: 5px solid white;
+    /* padding: 20px; */
+    width: 120px;
+    height: 120px;
+
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+}
+
+td:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+}
