@@ -20,6 +20,7 @@ h1 {
     align-items: center;
     /* height: 100vh; */
     margin-top: 200px;
+    position: relative;
 }
 
 /* Legen Sie die Farbe und Dicke der Tabelle fest */
@@ -44,4 +45,8 @@ table td {
 td:hover {
     background-color: rgba(255, 255, 255, 0.1);
     cursor: pointer;
+}
+
+.winning-line {
+    position: absolute;
 }
