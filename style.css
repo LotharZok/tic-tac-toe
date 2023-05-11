@@ -34,8 +34,8 @@ table {
 table td {
     border: 5px solid white;
     /* padding: 20px; */
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
 
     text-align: center;
     font-size: 36px;
@@ -49,4 +49,29 @@ td:hover {
 
 .winning-line {
     position: absolute;
+}
+
+.restartButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.restartButton button {
+    background-color: #0EBCEE;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 8px;
+    border: 1px solid darkgray;
+    border-radius: 6px;
+}
+
+.restartButton button:hover {
+    cursor: pointer;
+    background-color: #0ebdee5b;
+}
+
+.mt-32 {
+    margin-top: 32px;
 }

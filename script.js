@@ -47,27 +47,33 @@ function render() {
         cell.innerHTML = generateCrossSVG();
       } else {
         cell.onclick = () => {
-          // Wechseln Sie den aktuellen Spieler
-          currentPlayer = currentPlayer === 'circle' ? 'cross' : 'circle';
-
-          // Setzen Sie das aktuelle Feld im Array auf den aktuellen Spieler
-          fields[index] = currentPlayer;
-
-          // Fügen Sie den SVG-Code des aktuellen Spielers in die Zelle ein
-          if (currentPlayer === 'circle') {
-            cell.innerHTML = generateCircleSVG();
+          if (fields[index]) {  // Diese If-Abfrage wurde von mir eingebaut, ist nicht von chatGPT
+            // console.log('schon gefüllt');
           } else {
-            cell.innerHTML = generateCrossSVG();
-          }
+            // console.log('noch leer');
 
-          // Entfernen Sie das onclick-Attribut, um weitere Klicks auf diese Zelle zu verhindern
-          cell.removeAttribute('onclick');
+            // Wechseln Sie den aktuellen Spieler
+            currentPlayer = currentPlayer === 'circle' ? 'cross' : 'circle';
 
-          // Testen Sie, ob das Spiel vorbei ist
-          const result = checkWin();
-          if (result) {
-            // Wenn das Spiel vorbei ist, zeichnen Sie eine Linie durch die siegreichen Zellen
-            drawWinningLine(result);
+            // Setzen Sie das aktuelle Feld im Array auf den aktuellen Spieler
+            fields[index] = currentPlayer;
+
+            // Fügen Sie den SVG-Code des aktuellen Spielers in die Zelle ein
+            if (currentPlayer === 'circle') {
+              cell.innerHTML = generateCircleSVG();
+            } else {
+              cell.innerHTML = generateCrossSVG();
+            }
+
+            // Entfernen Sie das onclick-Attribut, um weitere Klicks auf diese Zelle zu verhindern
+            cell.removeAttribute('onclick');  // DAS IST BLÖDSINN !!! --> Das Attribut ist gar nicht vergeben und es wird anders auf ein Klick reagiert
+
+            // Testen Sie, ob das Spiel vorbei ist
+            const result = checkWin();
+            if (result) {
+              // Wenn das Spiel vorbei ist, zeichnen Sie eine Linie durch die siegreichen Zellen
+              drawWinningLine(result);
+            }
           }
         }
       }
@@ -86,14 +92,15 @@ function render() {
 }
 
 
+
 // Zweite Version, eine Zeile von mir deaktiviert <!-- -->
 //
 function generateCircleSVG() {
   const svgCode = `
       <svg viewBox="0 0 70 70">
         <circle cx="35" cy="35" r="30" fill="none" stroke="#0EBCEE" stroke-width="5" stroke-dasharray="188.5" stroke-dashoffset="188.5">
-          <animate attributeName="stroke-dashoffset" dur="0.5s" to="0" fill="freeze" />
-          <!-- animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 35 35" to="360 35 35" dur="0.75s" fill="freeze" / -->
+          <animate attributeName="stroke-dashoffset" dur="0.125s" to="0" fill="freeze" />
+          <!-- animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 35 35" to="360 35 35" dur="0.125s" fill="freeze" / -->
         </circle>
       </svg>
     `;
@@ -107,10 +114,10 @@ function generateCrossSVG() {
   const svgCode = `
       <svg viewBox="0 0 70 70">
         <line x1="10" y1="10" x2="60" y2="60" stroke="#F7C607" stroke-width="7" stroke-linecap="round" stroke-dasharray="150" stroke-dashoffset="150">
-          <animate attributeName="stroke-dashoffset" dur="0.5s" to="0" fill="freeze" />
+          <animate attributeName="stroke-dashoffset" dur="0.125s" to="0" fill="freeze" />
         </line>
         <line x1="60" y1="10" x2="10" y2="60" stroke="#F7C607" stroke-width="7" stroke-linecap="round" stroke-dasharray="150" stroke-dashoffset="150">
-          <animate attributeName="stroke-dashoffset" dur="0.5s" to="0" fill="freeze" />
+          <animate attributeName="stroke-dashoffset" dur="0.125s" to="0" fill="freeze" />
         </line>
       </svg>
     `;
@@ -169,12 +176,12 @@ function drawWinningLine(result) {
   console.log(posInArray);
   // 0,1,2 --> Waagerecht, 3,4,5 --> Senkrecht, 6 --> Diagonal links oben nach rechts unten, 7 --> Diagonal rechts oben nach links unten
 
-  // Setze die Positionen der Linie
+  // Setze die Positionen der Linie  --> Deaktiviert von mir, weil es so nicht funktionierte. Die Linien waren weitab vom Spielfeld
   // line.setAttribute('x1', positions[0].x);
   // line.setAttribute('y1', positions[0].y);
   // line.setAttribute('x2', positions[positions.length - 1].x);
   // line.setAttribute('y2', positions[positions.length - 1].y);
-  switch (posInArray) {
+  switch (posInArray) {  // Eingebaut von mir, damit die Positionen korrekt gesetzt werden
     case 0:
     case 1:
     case 2:
@@ -205,7 +212,6 @@ function drawWinningLine(result) {
       break;
   }
 
-
   svg.appendChild(line);
 
   const container = document.getElementById('content');
@@ -219,4 +225,20 @@ function getPosInArray(arrayOuter, arrayInner) {
       return i;
     }
   }
+}
+
+
+function restartGame() {
+  fields = [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ];
+  render();
 }
