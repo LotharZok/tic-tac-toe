@@ -98,7 +98,7 @@ function render() {
 function generateCircleSVG() {
   const svgCode = `
       <svg viewBox="0 0 70 70">
-        <circle cx="35" cy="35" r="30" fill="none" stroke="#0EBCEE" stroke-width="5" stroke-dasharray="188.5" stroke-dashoffset="188.5">
+        <circle cx="35" cy="35" r="30" fill="none" stroke="#0EBCEE" stroke-width="5" stroke-dasharray="188.5" stroke-dashoffset="188.5" stroke-linecap="round">
           <animate attributeName="stroke-dashoffset" dur="0.125s" to="0" fill="freeze" />
           <!-- animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0 35 35" to="360 35 35" dur="0.125s" fill="freeze" / -->
         </circle>
